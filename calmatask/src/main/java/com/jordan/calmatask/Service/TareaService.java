@@ -6,6 +6,6 @@ import com.jordan.calmatask.Entity.TareaEntity;
 
 public interface TareaService {
 
-    //lista todas las tareas
+    //lista todas las tareas de todos los usuarios
     List<TareaEntity> getAll();
 }

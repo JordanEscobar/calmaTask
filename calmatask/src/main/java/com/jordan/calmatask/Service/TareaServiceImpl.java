@@ -15,6 +15,7 @@ public class TareaServiceImpl implements TareaService{
     @Autowired
     private TareaRepository tareaRepo;
 
+    //lista todas las tareas de todos los usuarios
     @Override
     public List<TareaEntity> getAll() {
         return tareaRepo.findAll();

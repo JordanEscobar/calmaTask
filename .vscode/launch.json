@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CalmataskApplication<calmatask>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.jordan.calmatask.CalmataskApplication",
+            "projectName": "calmatask",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
