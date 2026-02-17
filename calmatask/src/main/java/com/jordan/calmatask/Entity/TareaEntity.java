@@ -2,102 +2,60 @@ package com.jordan.calmatask.Entity;
 
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.jordan.calmatask.Common.enums.Energia;
+import com.jordan.calmatask.Common.enums.EstadoTarea;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "tarea")
 public class TareaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(name = "titulo")
+    private Long id;
     private String titulo;
-    @Column(name = "descripcion")
+    @Column(length = 500)
     private String descripcion;
-    @Column(name = "energia")
-    private String energia;
-    @Column(name = "estado")
-    private String estado;
-    @Column(name= "fecha")
-    @JsonFormat(pattern ="dd-MM-yyyy")
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Energia energia;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private EstadoTarea estado;
+    @Column( nullable = false)
     private LocalDate fecha;
 
-    public TareaEntity(Integer id, String titulo, String descripcion, String energia, String estado, LocalDate fecha) {
-        this.id = id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id",nullable = false)
+    private UsuarioEntity usuario;
+
+    public TareaEntity(String titulo, String descripcion, Energia energia, EstadoTarea estado, LocalDate fecha,UsuarioEntity usuario) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.energia = energia;
         this.estado = estado;
         this.fecha = fecha;
+        this.usuario = usuario;
     }
 
-    public TareaEntity(){
+    protected TareaEntity(){
 
     }
-
-    public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-    public String getTitulo(){
-        return titulo;
-    }
-
-    public void setTitulo(String titulo)
-    {
-        this.titulo = titulo;
-    }
-
-        public String getDescripcion(){
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion)
-    {
-        this.descripcion = descripcion;
-    }
-
-        public String getEnergia(){
-        return energia;
-    }
-
-    public void setEnergia(String energia)
-    {
-        this.energia = energia;
-    }
-
-        public String getEstado(){
-        return estado;
-    }
-
-    public void setEstado(String estado)
-    {
-        this.estado = estado;
-    }
-
-    public LocalDate getFecha()
-    {
-        return fecha;
-    }
-
-    public void setFecha(LocalDate fecha)
-    {
-        this.fecha = fecha;
-    }
-
-
-    
 
 
 
